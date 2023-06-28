@@ -1,25 +1,27 @@
 module.exports = {
-  sets: {
-    desktop: {
-      files: "test/hermione",
+    sets: {
+        all: {
+            files: 'test/hermione/*.ts',
+        },
     },
-  },
-
-  browsers: {
-    chrome: {
-      automationProtocol: "devtools",
-      desiredCapabilities: {
-        browserName: "chrome",
-      },
-      windowSize: {
-        width: 1920,
-        height: 1080,
-      },
+    system: {
+        fileExtensions: ['.ts'],
     },
-  },
-  plugins: {
-    "html-reporter/hermione": {
-      enabled: true,
+    browsers: {
+        chrome: {
+            automationProtocol: 'devtools',
+            desiredCapabilities: {
+                browserName: 'chrome',
+            },
+            windowSize: {
+                width: 1920,
+                height: 1080,
+            },
+        },
     },
-  },
+    plugins: {
+        'html-reporter/hermione': {
+            enabled: true,
+        },
+    },
 };
