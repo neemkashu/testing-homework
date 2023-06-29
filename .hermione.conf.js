@@ -11,13 +11,23 @@ module.exports = {
         fileExtensions: ['.ts'],
     },
     browsers: {
-        chrome: {
+        chromeDesktop: {
             automationProtocol: 'devtools',
             desiredCapabilities: {
                 browserName: 'chrome',
             },
             windowSize: {
                 width: 1920,
+                height: 1080,
+            },
+        },
+        chromeTablet: {
+            automationProtocol: 'devtools',
+            desiredCapabilities: {
+                browserName: 'chrome',
+            },
+            windowSize: {
+                width: 575,
                 height: 1080,
             },
         },
