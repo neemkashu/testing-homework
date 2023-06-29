@@ -9,6 +9,9 @@ module.exports = {
     },
     system: {
         fileExtensions: ['.ts'],
+        ctx: {
+            bug: 10,
+        },
     },
     browsers: {
         chromeDesktop: {
