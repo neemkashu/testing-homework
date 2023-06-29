@@ -6,9 +6,8 @@ import { initStore } from '../../src/client/store';
 import { Provider } from 'react-redux';
 import { Application } from '../../src/client/Application';
 import { CartApi, ExampleApi } from '../../src/client/api';
+import { ROUTES, basename } from './constants';
 
-const routes = ['/', '/catalog', '/delivery', '/contacts'];
-const basename = '/hw/store';
 const api = new ExampleApi(basename);
 const cart = new CartApi();
 const store = initStore(api, cart);
@@ -24,7 +23,7 @@ function checkSomeChildrenRendered(application: JSX.Element) {
 describe('Проверка открытия страниц приложения. Открываются: ', () => {
     it('главная страница', () => {
         const application = (
-            <MemoryRouter initialEntries={[routes[0]]}>
+            <MemoryRouter initialEntries={[ROUTES.main]}>
                 <Provider store={store}>
                     <Application />
                 </Provider>
@@ -35,7 +34,7 @@ describe('Проверка открытия страниц приложения.
     });
     it('каталог', () => {
         const application = (
-            <MemoryRouter initialEntries={[routes[1]]}>
+            <MemoryRouter initialEntries={[ROUTES.catalog]}>
                 <Provider store={store}>
                     <Application />
                 </Provider>
@@ -45,7 +44,7 @@ describe('Проверка открытия страниц приложения.
     });
     it('условия доставки', () => {
         const application = (
-            <MemoryRouter initialEntries={[routes[2]]}>
+            <MemoryRouter initialEntries={[ROUTES.delivery]}>
                 <Provider store={store}>
                     <Application />
                 </Provider>
@@ -55,7 +54,7 @@ describe('Проверка открытия страниц приложения.
     });
     it('контакты', () => {
         const application = (
-            <MemoryRouter initialEntries={[routes[3]]}>
+            <MemoryRouter initialEntries={[ROUTES.contacts]}>
                 <Provider store={store}>
                     <Application />
                 </Provider>
