@@ -1,7 +1,10 @@
+require('tsconfig-paths');
+require('ts-node/register');
+
 module.exports = {
     sets: {
         all: {
-            files: 'test/hermione/*.ts',
+            files: 'test/hermione',
         },
     },
     system: {
