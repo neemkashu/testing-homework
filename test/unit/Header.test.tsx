@@ -1,4 +1,3 @@
-import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import {
@@ -7,15 +6,11 @@ import {
     getByText,
     render,
 } from '@testing-library/react';
-import { MemoryRouter } from 'react-router';
-import { initStore } from '../../src/client/store';
-import { Provider } from 'react-redux';
-import { Application } from '../../src/client/Application';
-import { CartApi, ExampleApi } from '../../src/client/api';
 import { ROUTES, basename } from './constants';
+import { initStubedApp } from '../hermione/helpers';
 
 describe('В шапке находятся ссылки магазина, проверяем на главной странице', () => {
-    const api = new ExampleApi(basename);
+    const application = initStubedApp(ROUTES.main);
 
     const clickLinkProcedure = async (
         container: HTMLElement,
@@ -27,24 +22,7 @@ describe('В шапке находятся ссылки магазина, про
         await user.click(link);
         await new Promise(process.nextTick);
     };
-    api.getProducts = () =>
-        Promise.resolve({
-            data: [{ id: 123, name: 'My name', price: 321 }],
-            status: 200,
-            statusText: 'ok',
-            headers: {},
-            config: {},
-        });
 
-    const cart = new CartApi();
-    const store = initStore(api, cart);
-    const application = (
-        <MemoryRouter initialEntries={[ROUTES.main]}>
-            <Provider store={store}>
-                <Application />
-            </Provider>
-        </MemoryRouter>
-    );
     it('их 5 штук', () => {
         const { container } = render(application);
         const header = container.querySelector('nav');
