@@ -6,7 +6,9 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { Application } from '../../src/client/Application';
 import {
+    ServerProductIdMock,
     ServerProductMock,
+    generateServerProductIdResponse,
     generateServerProductsResponse,
 } from '../mocks/products';
 
@@ -14,12 +16,15 @@ export const addBug = (URL: string) => `${URL}?bug_id=${hermione.ctx.bug}`;
 
 export const initStubedApp = (
     page: (typeof ROUTES)[keyof typeof ROUTES],
-    productConfig?: ServerProductMock
+    productConfig?: ServerProductMock,
+    productById?: ServerProductIdMock
 ) => {
     const api = new ExampleApi(basename);
 
     api.getProducts = () =>
         Promise.resolve(generateServerProductsResponse(productConfig));
+    api.getProductById = () =>
+        Promise.resolve(generateServerProductIdResponse(productById));
 
     const cart = new CartApi();
     const store = initStore(api, cart);

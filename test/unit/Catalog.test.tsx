@@ -27,7 +27,6 @@ describe('Каталог', () => {
         const { container, queryByText } = render(application);
         await Promise.resolve();
 
-        screen.debug;
         const nullObjects = queryByText('null');
         writeFileSync(`logs/catalog-index.txt`, String(nullObjects));
         const undefinedObjects = queryByText('undefined');
