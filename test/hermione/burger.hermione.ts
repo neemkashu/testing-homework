@@ -1,7 +1,7 @@
 import { addBug } from './helpers';
 
 hermione.skip.in('chromeDesktop', 'проверяем только на мобильные');
-describe.skip('В шапке на мобильных работает бургер ', async function () {
+describe.only('В шапке на мобильных работает бургер ', async function () {
     it('проверка скриншота', async function () {
         await this.browser.url(addBug('http://localhost:3000/hw/store'));
         await this.browser.assertView(`plain`, 'body');

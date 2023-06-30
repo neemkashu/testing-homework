@@ -10,7 +10,7 @@ module.exports = {
     system: {
         fileExtensions: ['.ts'],
         ctx: {
-            bug: 10,
+            bug: 1,
         },
     },
     browsers: {
