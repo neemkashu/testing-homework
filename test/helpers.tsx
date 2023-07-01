@@ -47,8 +47,8 @@ export class LocalStorageMock {
     }
 }
 
-export const addBug = (URL: string) =>
-    `${URL}?${MOCK_QUERY}=1&bug_id=${process.env.BUG_ID}`;
+export const addBug = (URL: string, isMocked?: boolean) =>
+    `${URL}?${isMocked ? MOCK_QUERY + '=1&' : ''}bug_id=${process.env.BUG_ID}`;
 
 export const initStubedApp = (
     page: (typeof ROUTES)[keyof typeof ROUTES],

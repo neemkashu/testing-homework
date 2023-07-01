@@ -1,19 +1,14 @@
 import { writeFileSync } from 'fs';
 import userEvent from '@testing-library/user-event';
-import { ROUTES, basename } from './constants';
+import { ROUTES } from './constants';
 import { initStubedApp, writeLog } from '../helpers';
 import {
     findAllByTestId,
-    findAllByText,
-    findByTestId,
     findByText,
-    getAllByRole,
     getByRole,
-    getByTestId,
     getByText,
     queryByText,
     render,
-    screen,
     waitFor,
 } from '@testing-library/react';
 
@@ -86,7 +81,7 @@ describe('На странице товара', () => {
         const application = initStubedApp(ROUTES.productById);
         const { findAllByRole, container } = render(application);
         await waitFor(() => findByText(container, 'Add to Cart'));
-        await waitFor(() => findByText(container, 'Add to Cart'));
+
         const buttonCart = getByText(container, 'Add to Cart');
 
         const user = userEvent.setup();

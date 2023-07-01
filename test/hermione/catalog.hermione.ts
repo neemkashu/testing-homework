@@ -26,7 +26,7 @@ describe.only('Товар в каталоге', async function () {
     });
     it('проверка вёрстки по скриншоту', async function () {
         await this.browser.url(
-            addBug(BASE_URL + ROUTES.catalog + '/' + TEST_CATALOG[0].id)
+            addBug(BASE_URL + ROUTES.catalog + '/' + TEST_CATALOG[0].id, true)
         );
         await this.browser.pause(200);
         await this.browser.assertView(`plain`, 'body');
