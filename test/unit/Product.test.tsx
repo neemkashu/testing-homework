@@ -59,9 +59,6 @@ describe('Карточки каталога', () => {
 });
 
 describe('На странице товара', () => {
-    const application = initStubedApp(ROUTES.productById);
-    const { findAllByRole, container } = render(application);
-
     it('отображается кнопка добавления в корзину', async () => {
         const application = initStubedApp(ROUTES.productById);
         const { findAllByRole, container } = render(application);

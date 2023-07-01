@@ -39,6 +39,7 @@ export const generateServerProductsResponse = (params?: {
 export const generateServerProductIdResponse = (params?: {
     data?: Product;
     status?: number;
+    id?: number;
 }): ServerProductIdMock => {
     const data = params?.data;
     const status = params?.status;
