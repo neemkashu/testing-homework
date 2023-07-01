@@ -13,13 +13,13 @@ export interface ServerProductIdMock extends AxiosFields {
     data: Product;
 }
 
-export const OneProductCatalog = [{ id: 123, name: 'My name', price: 321 }];
-export const OneProduct: Product = {
+export const TEST_CATALOG = [{ id: 1, name: 'My name', price: 321 }];
+export const TEST_PRODUCT: Product = {
     description: 'Long text',
     material: 'Mock1',
     color: 'Mock2',
-    ...OneProductCatalog[0],
-};
+    ...TEST_CATALOG[0],
+} as const;
 
 export const generateServerProductsResponse = (params?: {
     data?: ProductShortInfo[];
@@ -28,7 +28,7 @@ export const generateServerProductsResponse = (params?: {
     const data = params?.data;
     const status = params?.status;
     return {
-        data: data ?? OneProductCatalog,
+        data: data ?? TEST_CATALOG,
         status: status ?? 200,
         statusText: 'ok',
         headers: {},
@@ -43,7 +43,7 @@ export const generateServerProductIdResponse = (params?: {
     const data = params?.data;
     const status = params?.status;
     return {
-        data: data ?? OneProduct,
+        data: data ?? TEST_PRODUCT,
         status: status ?? 200,
         statusText: 'ok',
         headers: {},

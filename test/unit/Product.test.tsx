@@ -13,7 +13,7 @@ import {
 } from '@testing-library/react';
 
 import { Product } from '../../src/common/types';
-import { OneProduct } from '../mocks/products';
+import { TEST_PRODUCT } from '../mocks/products';
 
 describe.only('Карточки каталога', () => {
     const product = {
@@ -25,7 +25,7 @@ describe.only('Карточки каталога', () => {
         material: 'cotton',
     };
     const productConfig: { data: Product[] } = {
-        data: [OneProduct],
+        data: [TEST_PRODUCT],
     };
     const application = initStubedApp(ROUTES.catalog);
 

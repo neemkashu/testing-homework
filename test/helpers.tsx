@@ -12,8 +12,10 @@ import {
     generateServerProductIdResponse,
     generateServerProductsResponse,
 } from './mocks/products';
+import { MOCK_QUERY } from './hermione/constants';
 
-export const addBug = (URL: string) => `${URL}?bug_id=${process.env.BUG_ID}`;
+export const addBug = (URL: string) =>
+    `${URL}?${MOCK_QUERY}=1&bug_id=${process.env.BUG_ID}`;
 
 export const initStubedApp = (
     page: (typeof ROUTES)[keyof typeof ROUTES],
