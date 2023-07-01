@@ -13,6 +13,39 @@ import {
     generateServerProductsResponse,
 } from './mocks/products';
 import { MOCK_QUERY } from './hermione/constants';
+import { CartState } from '../src/common/types';
+
+export class LocalStorageMock {
+    store: Record<string, string>;
+
+    constructor() {
+        this.store = {};
+    }
+
+    get length(): number {
+        return Object.keys(this.store).length;
+    }
+
+    key(index: number): string | null {
+        return Object.keys(this.store)[index] ?? null;
+    }
+
+    clear(): void {
+        this.store = {};
+    }
+
+    getItem(key: string): string | null {
+        return this.store[key] || null;
+    }
+
+    setItem(key: string, value: string): void {
+        this.store[key] = String(value);
+    }
+
+    removeItem(key: string): void {
+        delete this.store[key];
+    }
+}
 
 export const addBug = (URL: string) =>
     `${URL}?${MOCK_QUERY}=1&bug_id=${process.env.BUG_ID}`;
@@ -22,6 +55,7 @@ export const initStubedApp = (
     productConfig?: ServerProductMock,
     productById?: ServerProductIdMock
 ) => {
+    const localStorageMock = new LocalStorageMock();
     const api = new ExampleApi(basename);
 
     api.getProducts = () =>
@@ -30,6 +64,14 @@ export const initStubedApp = (
         Promise.resolve(generateServerProductIdResponse(productById));
 
     const cart = new CartApi();
+
+    cart.setState = (cart: CartState) =>
+        localStorageMock.setItem('key', JSON.stringify(cart));
+    cart.getState = () => {
+        const json = localStorage.getItem('key');
+        return (JSON.parse(json) as CartState) || {};
+    };
+
     const store = initStore(api, cart);
     const application = (
         <MemoryRouter initialEntries={[page]}>
@@ -47,6 +89,7 @@ type WriteAny = <T>(
     type?: 'jest' | 'hermione'
 ) => void;
 
+// typical usage: writeLog(logStack, 'catalog', 'hermione');
 export const writeLog: WriteAny = (content, fileName, type = 'jest'): void => {
     writeFileSync(
         `logs/${type}-${fileName}.html`,

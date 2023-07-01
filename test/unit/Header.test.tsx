@@ -9,7 +9,7 @@ import {
 import { ROUTES, basename } from './constants';
 import { initStubedApp } from '../helpers';
 
-describe.skip('В шапке находятся ссылки магазина, проверяем на главной странице', () => {
+describe('В шапке находятся ссылки магазина, проверяем на главной странице', () => {
     const application = initStubedApp(ROUTES.main);
 
     const clickLinkProcedure = async (
