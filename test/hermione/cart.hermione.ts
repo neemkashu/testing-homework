@@ -34,5 +34,11 @@ describe.only('Корзина в каталоге', async function () {
         await this.browser.assertView(`navigation`, 'nav');
     });
 
+    it('сохраняются данные после перезугразки', async function () {
+        await this.browser.refresh();
+        this.browser.pause(200);
+        await this.browser.assertView(`cart`, 'nav');
+    });
+
     writeLog(logStack, 'cart', 'hermione');
 });
