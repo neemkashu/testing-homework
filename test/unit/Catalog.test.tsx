@@ -28,8 +28,8 @@ describe('Каталог', () => {
         await Promise.resolve();
 
         const nullObjects = queryByText('null');
-        writeFileSync(`logs/catalog-index.txt`, String(nullObjects));
         const undefinedObjects = queryByText('undefined');
+        writeFileSync(`logs/catalog-index.txt`, String(nullObjects));
         expect(nullObjects).toBe(null);
         expect(undefinedObjects).toBe(null);
     });

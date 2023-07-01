@@ -1,3 +1,4 @@
+import { writeFileSync } from 'fs';
 import { ROUTES } from '../unit/constants';
 import { baseUrl } from './constants';
 import { addBug } from './helpers';
@@ -6,23 +7,24 @@ hermione.skip.in('chromeTablet', 'проверяем только на деск�
 describe.only('Товар в каталоге', async function () {
     const catalogPath = addBug(baseUrl + ROUTES.catalog);
 
-    it('проверка скриншота', async function () {
+    it('проверка непустых данных в каталоге', async function () {
         await this.browser.url(catalogPath);
-        await this.browser.assertView(`plain`, 'body');
-    });
-    it('проверка наличия кнопки', async function () {
-        await this.browser.url(catalogPath);
-        await expect(this.browser.$('button')).toHaveAttr('aria-label');
-    });
+        this.browser.pause(200);
+        const cardHeader = await this.browser.$('h5');
+        // have to make specific to match the price element by <p> tag
+        const cardPrice = await this.browser.$('p*=$');
+        const headerContent = await cardHeader.getHTML(false);
+        const priceContent = await cardPrice.getHTML(false);
 
-    it('при повторном нажатии меню исчезает', async function () {
-        await this.browser.url(catalogPath);
-        const button = await this.browser.$('button');
-        await button.click();
-        // await Promise.resolve();
-        await button.click();
-        await this.browser.pause(500);
+        expect(headerContent.trim().length).toBeGreaterThan(0);
+        expect(priceContent.trim().slice(1).length).toBeGreaterThan(0);
 
-        await this.browser.assertView(`navigation-hidden`, 'nav');
+        writeFileSync(
+            'logs/hermione-catalog.html',
+            `${await cardHeader.getHTML(false)}
+${await cardPrice.getHTML(false)}
+bug id ${process.env.BUG_ID}
+`
+        );
     });
 });

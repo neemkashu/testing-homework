@@ -1,1 +1,1 @@
-export const baseUrl = 'http://localhost:3000/hw';
+export const baseUrl = 'http://localhost:3000/hw/store';

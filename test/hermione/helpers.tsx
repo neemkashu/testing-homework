@@ -12,7 +12,7 @@ import {
     generateServerProductsResponse,
 } from '../mocks/products';
 
-export const addBug = (URL: string) => `${URL}?bug_id=${hermione.ctx.bug}`;
+export const addBug = (URL: string) => `${URL}?bug_id=${process.env.BUG_ID}`;
 
 export const initStubedApp = (
     page: (typeof ROUTES)[keyof typeof ROUTES],
