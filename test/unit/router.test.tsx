@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { ROUTES, basename } from './constants';
-import { initStubedApp } from '../hermione/helpers';
+import { initStubedApp } from '../helpers';
 
 function checkSomeChildrenRendered(application: JSX.Element) {
     const { container } = render(application);

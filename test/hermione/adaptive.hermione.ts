@@ -1,4 +1,4 @@
-import { addBug } from './helpers';
+import { addBug } from '../helpers';
 
 hermione.skip.in('chromeDesktop', 'проверяем только на мобильные');
 describe.skip('Страницы имеют адаптивный дизайн', async function () {

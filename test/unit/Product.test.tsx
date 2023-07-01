@@ -1,7 +1,7 @@
 import { writeFileSync } from 'fs';
 import userEvent from '@testing-library/user-event';
 import { ROUTES, basename } from './constants';
-import { initStubedApp } from '../hermione/helpers';
+import { initStubedApp } from '../helpers';
 import {
     findAllByTestId,
     findByTestId,

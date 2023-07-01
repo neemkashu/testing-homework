@@ -1,6 +1,6 @@
 import { writeFileSync } from 'fs';
 import { ROUTES, basename } from './constants';
-import { initStubedApp } from '../hermione/helpers';
+import { initStubedApp } from '../helpers';
 import { render, screen } from '@testing-library/react';
 import { generateServerProductsResponse } from '../mocks/products';
 

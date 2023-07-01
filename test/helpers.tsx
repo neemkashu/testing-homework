@@ -1,16 +1,17 @@
+import { writeFileSync } from 'fs';
 import { MemoryRouter } from 'react-router';
-import { ExampleApi, CartApi } from '../../src/client/api';
-import { initStore } from '../../src/client/store';
-import { basename, ROUTES } from '../unit/constants';
+import { ExampleApi, CartApi } from '../src/client/api';
+import { initStore } from '../src/client/store';
+import { basename, ROUTES } from './unit/constants';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Application } from '../../src/client/Application';
+import { Application } from '../src/client/Application';
 import {
     ServerProductIdMock,
     ServerProductMock,
     generateServerProductIdResponse,
     generateServerProductsResponse,
-} from '../mocks/products';
+} from './mocks/products';
 
 export const addBug = (URL: string) => `${URL}?bug_id=${process.env.BUG_ID}`;
 
@@ -36,4 +37,19 @@ export const initStubedApp = (
         </MemoryRouter>
     );
     return application;
+};
+
+type WriteAny = <T>(
+    content: T[],
+    fileName: string,
+    type?: 'jest' | 'hermione'
+) => void;
+
+export const writeLog: WriteAny = (content, fileName, type = 'jest'): void => {
+    writeFileSync(
+        `logs/${type}-${fileName}.html`,
+        `${content.join('\n')}
+bug id ${process.env.BUG_ID}
+`
+    );
 };

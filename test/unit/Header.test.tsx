@@ -7,7 +7,7 @@ import {
     render,
 } from '@testing-library/react';
 import { ROUTES, basename } from './constants';
-import { initStubedApp } from '../hermione/helpers';
+import { initStubedApp } from '../helpers';
 
 describe.skip('В шапке находятся ссылки магазина, проверяем на главной странице', () => {
     const application = initStubedApp(ROUTES.main);

@@ -1,5 +1,5 @@
 import { writeFileSync } from 'fs';
-import { addBug } from './helpers';
+import { addBug } from '../helpers';
 
 hermione.skip.in('chromeTablet', 'проверяем только на десктопе');
 describe.skip('Статичные страницы имеют статичное содержание', async function () {
