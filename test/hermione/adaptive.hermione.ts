@@ -1,7 +1,7 @@
 import { addBug } from '../helpers';
 
 hermione.skip.in('chromeDesktop', 'проверяем только на мобильные');
-describe.skip('Страницы имеют адаптивный дизайн', async function () {
+describe('Страницы имеют адаптивный дизайн', async function () {
     it('главная страница', async function () {
         await this.browser.url(addBug('http://localhost:3000/hw/store/'));
         await this.browser.assertView(`plain`, 'body');

@@ -3,7 +3,7 @@ import { BASE_URL } from './constants';
 import { addBug, writeLog } from '../helpers';
 
 hermione.skip.in('chromeTablet', 'проверяем только на десктопе');
-describe.only('Товар в каталоге', async function () {
+describe('Товар в каталоге', async function () {
     const catalogPath = addBug(BASE_URL + ROUTES_STATIC.catalog);
 
     const logStack: string[] = [];

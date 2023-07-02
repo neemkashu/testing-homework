@@ -21,7 +21,7 @@ describe('Каталог', () => {
             generateServerProductsResponse({
                 data: [
                     { price: null, id: 0, name: '' },
-                    { price: null, id: 0, name: 'QWERTY' },
+                    { price: null, id: 1, name: 'QWERTY' },
                 ],
                 status: 200,
             })

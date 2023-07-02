@@ -3,6 +3,7 @@ export const ROUTES_STATIC = {
     catalog: '/catalog',
     delivery: '/delivery',
     contacts: '/contacts',
+    cart: '/cart',
 } as const;
 export type RoutType =
     | (typeof ROUTES_STATIC)[keyof typeof ROUTES_STATIC]
