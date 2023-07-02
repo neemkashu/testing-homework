@@ -26,7 +26,7 @@ export class ExampleApi {
 
     async getProductById(id: number) {
         if (new URL(document.location.href).searchParams.has(MOCK_QUERY)) {
-            return Promise.resolve(generateServerProductIdResponse());
+            return Promise.resolve(generateServerProductIdResponse({ id }));
         }
         return await axios.get<Product>(`${this.basename}/api/products/${id}`);
     }

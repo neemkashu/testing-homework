@@ -1,10 +1,10 @@
-import { ROUTES } from '../unit/constants';
+import { ROUTES_STATIC } from '../unit/constants';
 import { BASE_URL } from './constants';
 import { addBug, writeLog } from '../helpers';
 
 hermione.skip.in('chromeTablet', 'проверяем только на десктопе');
 describe.only('Корзина в каталоге', async function () {
-    const catalogPath = addBug(BASE_URL + ROUTES.catalog);
+    const catalogPath = addBug(BASE_URL + ROUTES_STATIC.catalog);
 
     const logStack: string[] = [];
 

@@ -6,11 +6,11 @@ import {
     getByText,
     render,
 } from '@testing-library/react';
-import { ROUTES, basename } from './constants';
+import { ROUTES_STATIC, basename } from './constants';
 import { initStubedApp } from '../helpers';
 
 describe('В шапке находятся ссылки магазина, проверяем на главной странице', () => {
-    const application = initStubedApp(ROUTES.main);
+    const { application } = initStubedApp(ROUTES_STATIC.main);
 
     const clickLinkProcedure = async (
         container: HTMLElement,

@@ -1,11 +1,10 @@
-import { ROUTES } from '../unit/constants';
+import { ROUTES_STATIC } from '../unit/constants';
 import { BASE_URL } from './constants';
 import { addBug, writeLog } from '../helpers';
-import { TEST_CATALOG } from '../mocks/products';
 
 hermione.skip.in('chromeTablet', 'проверяем только на десктопе');
 describe.only('Товар в каталоге', async function () {
-    const catalogPath = addBug(BASE_URL + ROUTES.catalog);
+    const catalogPath = addBug(BASE_URL + ROUTES_STATIC.catalog);
 
     const logStack: string[] = [];
 
@@ -26,7 +25,7 @@ describe.only('Товар в каталоге', async function () {
     });
     it('проверка вёрстки по скриншоту', async function () {
         await this.browser.url(
-            addBug(BASE_URL + ROUTES.catalog + '/' + TEST_CATALOG[0].id, true)
+            addBug(BASE_URL + ROUTES_STATIC.catalog + '/1', true)
         );
         await this.browser.pause(200);
         await this.browser.assertView(`plain`, 'body');

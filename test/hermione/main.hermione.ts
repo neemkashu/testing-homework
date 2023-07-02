@@ -1,4 +1,3 @@
-import { writeFileSync } from 'fs';
 import { addBug } from '../helpers';
 
 hermione.skip.in('chromeTablet', 'проверяем только на десктопе');
