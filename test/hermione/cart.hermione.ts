@@ -37,12 +37,20 @@ describe('Корзина в каталоге', async function () {
         const [page] = await puppeteer.pages();
         const cartLink = await this.browser.$$('a')[4];
         await cartLink.click();
-        const name = await this.browser.$$('input')[0]
-        const phone = await this.browser.$$('input')[1]
-        const address = await this.browser.$('textarea')
-        await name.setValue('1233983434938483943')
-        await phone.setValue('1233983434938483943')
-        await address.setValue('1233983434938483943')
+
+        try {
+    
+            const name = await this.browser.$$('input')[0]
+            const phone = await this.browser.$$('input')[1]
+            const address = await this.browser.$('textarea')
+            await name.setValue('1233983434938483943')
+            await phone.setValue('1233983434938483943')
+            await address.setValue('1233983434938483943')
+            
+        } catch (error) {
+            throw new Error("Не добавились товары в корзину");
+            
+        }
         const purchase = await this.browser.$$('button')[2]
         await purchase.click()
         await this.browser.pause(500)
