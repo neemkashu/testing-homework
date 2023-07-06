@@ -9,10 +9,8 @@ describe('Корзина в каталоге', async function () {
         const productPath = addBug(BASE_URL + ROUTES_STATIC.catalog + '/0');
 
         await this.browser.url(productPath);
-        await this.browser.pause(1000)
 
         const button = await this.browser.$$('button')[1];
-        await this.browser.pause(1000)
 
         await button.click();
 
@@ -23,8 +21,35 @@ describe('Корзина в каталоге', async function () {
         await page.evaluate(() => {
             window.localStorage.clear()
         })
-        await this.browser.pause(1000)
         await this.browser.assertView(`cart`, 'nav');
+        await this.browser.refresh();
+    });
+    it('происходит покупка: добавление в корзину, заполнение формы, отправка формы', async function () {
+        const productPath = addBug(BASE_URL + ROUTES_STATIC.catalog + '/0');
+
+        await this.browser.url(productPath);
+
+        const button = await this.browser.$$('button')[1];
+
+        await button.click();
+
+        const puppeteer = this.browser.puppeteer;
+        const [page] = await puppeteer.pages();
+        const cartLink = await this.browser.$$('a')[4];
+        await cartLink.click();
+        const name = await this.browser.$$('input')[0]
+        const phone = await this.browser.$$('input')[1]
+        const address = await this.browser.$('textarea')
+        await name.setValue('1233983434938483943')
+        await phone.setValue('1233983434938483943')
+        await address.setValue('1233983434938483943')
+        const purchase = await this.browser.$$('button')[2]
+        await purchase.click()
+        await this.browser.pause(500)
+        await this.browser.assertView(`cart`, 'body');
+        await page.evaluate(() => {
+            window.localStorage.clear()
+        })
         await this.browser.refresh();
     });
 });
