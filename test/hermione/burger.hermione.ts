@@ -1,7 +1,7 @@
 import { addBug } from '../helpers';
 
 hermione.skip.in('chromeDesktop', 'проверяем только на мобильные');
-describe('В шапке на мобильных работает бургер ', async function () {
+describe.only('В шапке на мобильных работает бургер ', async function () {
     it('проверка скриншота', async function () {
         await this.browser.url(addBug('http://localhost:3000/hw/store'));
         await this.browser.assertView(`plain`, 'body');
@@ -28,5 +28,14 @@ describe('В шапке на мобильных работает бургер ',
         await this.browser.pause(500);
 
         await this.browser.assertView(`navigation-hidden`, 'nav');
+    });
+    it('при нажатии на ссылку меню исчезает', async function () {
+        await this.browser.url(addBug('http://localhost:3000/hw/store'));
+        const button = await this.browser.$('button');
+        await button.click();
+        const link = await this.browser.$$('.nav-link');
+        await link[2].click()
+        await this.browser.pause(500);
+        await this.browser.assertView(`navigation-hidden-link`, 'nav');
     });
 });
