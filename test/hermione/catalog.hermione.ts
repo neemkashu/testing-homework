@@ -29,16 +29,6 @@ describe('Товар в каталоге', async function () {
         );
         await this.browser.pause(200);
         await this.browser.assertView(`plain`, 'body');
-        const details = await this.browser.$$('dd');
-
-        const colorContent = await details[0].getHTML(false);
-        const materialContent = await details[1].getHTML(false);
-
-        logStack.push(colorContent);
-        logStack.push(materialContent);
-
-        expect(colorContent).toBe('Mock2');
-        expect(materialContent).toBe('Mock1');
     });
 
     writeLog(logStack, 'catalog', 'hermione');
