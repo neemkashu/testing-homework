@@ -41,9 +41,47 @@ export class ExampleApi {
 
 export const LOCAL_STORAGE_CART_KEY = 'example-store-cart';
 
+export class LocalStorageMock {
+    store: Record<string, string>;
+
+    constructor() {
+        this.store = {};
+    }
+
+    get length(): number {
+        return Object.keys(this.store).length;
+    }
+
+    key(index: number): string | null {
+        return Object.keys(this.store)[index] ?? null;
+    }
+
+    clear(): void {
+        this.store = {};
+    }
+
+    getItem(key: string): string | null {
+        return this.store[key] || null;
+    }
+
+    setItem(key: string, value: string): void {
+        this.store[key] = String(value);
+    }
+
+    removeItem(key: string): void {
+        delete this.store[key];
+    }
+}
+
+const localStorageMock = new LocalStorageMock();
+
 export class CartApi {
     getState(): CartState {
         try {
+            if (new URL(document.location.href).searchParams.has(MOCK_QUERY)) {
+                const json = localStorageMock.getItem(LOCAL_STORAGE_CART_KEY);
+                return (JSON.parse(json) as CartState) || {};
+            }
             const json = localStorage.getItem(LOCAL_STORAGE_CART_KEY);
             return (JSON.parse(json) as CartState) || {};
         } catch {
@@ -52,6 +90,10 @@ export class CartApi {
     }
 
     setState(cart: CartState) {
+        if (new URL(document.location.href).searchParams.has(MOCK_QUERY)) {
+            localStorageMock.setItem(LOCAL_STORAGE_CART_KEY, JSON.stringify(cart));
+            return;
+        }
         localStorage.setItem(LOCAL_STORAGE_CART_KEY, JSON.stringify(cart));
     }
 }
