@@ -1,21 +1,43 @@
-module.exports = {
-  sets: {
-    desktop: {
-      files: "test/hermione",
-    },
-  },
+require('tsconfig-paths');
+require('ts-node/register');
 
-  browsers: {
-    chrome: {
-      automationProtocol: "devtools",
-      desiredCapabilities: {
-        browserName: "chrome",
-      },
+module.exports = {
+    sets: {
+        all: {
+            files: 'test/hermione',
+        },
     },
-  },
-  plugins: {
-    "html-reporter/hermione": {
-      enabled: true,
+    system: {
+        fileExtensions: ['.ts'],
+        ctx: {
+            bug: 0,
+        },
     },
-  },
+    browsers: {
+        chromeDesktop: {
+            automationProtocol: 'devtools',
+            desiredCapabilities: {
+                browserName: 'chrome',
+            },
+            windowSize: {
+                width: 1920,
+                height: 1080,
+            },
+        },
+        chromeTablet: {
+            automationProtocol: 'devtools',
+            desiredCapabilities: {
+                browserName: 'chrome',
+            },
+            windowSize: {
+                width: 575,
+                height: 3000,
+            },
+        },
+    },
+    plugins: {
+        'html-reporter/hermione': {
+            enabled: true,
+        },
+    },
 };
